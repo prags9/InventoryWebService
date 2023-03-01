@@ -11,15 +11,23 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Name" />            
+            <input type="hidden" asp-for="Name" />   
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" disabled/>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedOn" class="control-label"></label>
+                <input asp-for="CreatedOn" class="form-control" disabled />
+            </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
                 <input asp-for="Quantity" class="form-control" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedOn" class="control-label"></label>
-                <input asp-for="CreatedOn" class="form-control" />
+                <label asp-for="LastUpdatedOn" class="control-label"></label>
+                <input asp-for="LastUpdatedOn" class="form-control" value="@Html.TextBox(" date", DateTime.Now.ToShortDateString())" />
                 <span asp-validation-for="CreatedOn" class="text-danger"></span>
             </div>            
             <div class="form-group">

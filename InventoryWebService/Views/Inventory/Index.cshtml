@@ -28,6 +28,9 @@
             <th>
                 @Html.DisplayNameFor(model => model![0].CreatedOn!)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model![0].LastUpdatedOn!)
+            </th>
             
             <th></th>
         </tr>
@@ -44,6 +47,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>                   
+                    @Html.DisplayFor(modelItem => item.LastUpdatedOn)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-itemName="@item.Name">Edit</a> |

@@ -32,6 +32,7 @@ namespace InventoryWebService.Repository
                         //Update
                         inventoryInDb.Quantity = inventory.Quantity;
                         inventoryInDb.CreatedOn = inventory.CreatedOn;
+                        inventoryInDb.LastUpdatedOn = inventory.LastUpdatedOn;
                         _db.Inventories.Update(inventoryInDb);
                     }
                     await _db.SaveChangesAsync();

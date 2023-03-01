@@ -11,5 +11,7 @@ namespace InventoryWebService.Models
         public DateTime CreatedOn { get; set; }
         [Timestamp]
         public byte[] RowVersion { get; set; }
+
+        public DateTime LastUpdatedOn { get; set; } = DateTime.Now;
     }
 }
