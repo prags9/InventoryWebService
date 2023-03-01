@@ -9,5 +9,7 @@ namespace InventoryWebService.Models
         public int Quantity { get; set; }
         [DataType(DataType.Date)]
         public DateTime CreatedOn { get; set; }
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

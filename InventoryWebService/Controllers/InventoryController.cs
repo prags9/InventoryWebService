@@ -1,11 +1,9 @@
 ﻿using InventoryWebService.Models;
 using InventoryWebService.Repository;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace InventoryWebService.Controllers
-{    
+{
     public class InventoryController : Controller
     {
         private readonly IInventoryRepository _inventoryRepository;
