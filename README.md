@@ -1,0 +1,4 @@
+# InventoryWebService
+
+.Net 6
+
