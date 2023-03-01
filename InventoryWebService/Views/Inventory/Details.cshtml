@@ -1,0 +1,36 @@
+﻿@model InventoryWebService.Models.Inventory
+
+@{
+    ViewData["Title"] = "Details";
+}
+<form asp-controller="Inventory" asp-action="Details" method="get" asp-route-itemName="@Model.Name">
+<h1>Details</h1>
+<div>
+    <h4>Inventory</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-itemName="@Model.Name">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</form>
