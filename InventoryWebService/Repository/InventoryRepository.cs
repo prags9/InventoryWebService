@@ -11,7 +11,32 @@ namespace InventoryWebService.Repository
 
         public InventoryRepository(InventoryContext db)
         {
+            //InMemory Db
             _db = db;
+            
+               /* _inventory = new List<Inventory>()
+                {
+                     new Inventory
+                    {
+                        Name = "Apples",
+                       Quantity = 10,
+                       CreatedOn = DateTime.Parse("2000-2-12")
+                    },
+                    new Inventory
+                    {
+                        Name = "Oranges",
+                        Quantity = 120,
+                        CreatedOn = DateTime.Parse("2003-2-12")
+                    }, new Inventory
+                    {
+                        Name = "Chiku",
+                        Quantity = 190,
+                        CreatedOn = DateTime.Parse("2000-2-10")
+                    }
+                };
+                _db.Inventories.AddRange(_inventory);
+                _db.SaveChanges();
+            */
         }
 
         public async Task<bool> CreateUpdate(IEnumerable<Inventory> inventories)
@@ -29,7 +54,7 @@ namespace InventoryWebService.Repository
                     if(inventoryInDb is null)
                     {
                         //Create
-                        _db.Add(inventory);
+                        _db.Inventories.Add(inventory);
 
                     }
                     else
@@ -38,6 +63,7 @@ namespace InventoryWebService.Repository
                         if (inventory.RowVersion != null)
                         {
                             _db.Entry(inventoryInDb).Property("RowVersion").OriginalValue = inventory.RowVersion;
+                            //inventory.RowVersion = inventory.RowVersion;
                         }
                         inventoryInDb.Quantity = inventory.Quantity;
                         inventoryInDb.CreatedOn = inventory.CreatedOn;
