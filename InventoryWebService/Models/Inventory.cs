@@ -8,7 +8,7 @@ namespace InventoryWebService.Models
         public string Name { get; set; }
         public int Quantity { get; set; }
         [DataType(DataType.Date)]
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
         [Timestamp]
         public byte[] RowVersion { get; set; }
 

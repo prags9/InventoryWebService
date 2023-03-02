@@ -16,11 +16,16 @@ namespace InventoryWebService.Repository
 
         public async Task<bool> CreateUpdate(IEnumerable<Inventory> inventories)
         {
+            var inventoryInDb = new Inventory();
             try
             {
+                if (!inventories.Any())
+                {
+                    return false;
+                }
                 foreach (var inventory in inventories)
                 {
-                    var inventoryInDb = await _db.Inventories.FirstOrDefaultAsync(x => x.Name.ToLower() == inventory.Name.ToLower());
+                    inventoryInDb = await _db.Inventories.FirstOrDefaultAsync(x => x.Name.ToLower() == inventory.Name.ToLower());
                     if(inventoryInDb is null)
                     {
                         //Create
@@ -30,6 +35,10 @@ namespace InventoryWebService.Repository
                     else
                     {
                         //Update
+                        if (inventory.RowVersion != null)
+                        {
+                            _db.Entry(inventoryInDb).Property("RowVersion").OriginalValue = inventory.RowVersion;
+                        }
                         inventoryInDb.Quantity = inventory.Quantity;
                         inventoryInDb.CreatedOn = inventory.CreatedOn;
                         inventoryInDb.LastUpdatedOn = inventory.LastUpdatedOn;
@@ -42,7 +51,8 @@ namespace InventoryWebService.Repository
             }
             catch
             {
-                return false;
+                
+                throw;
             }
         }
 
