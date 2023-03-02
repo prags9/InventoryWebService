@@ -19,10 +19,14 @@ namespace InventoryWebService.Controllers
             return inventories != null ? View(inventories.ToList()) : Problem("Entity set is null");
             
         }*/
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, string sortOrder)
         {
+            ViewData["QuantitySortParm"] = sortOrder == "quantity" ? "quantity_desc" : "quantity";
+            ViewData["CreatedOnSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";           
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";           
 
-            var inventories = await _inventoryRepository.Get();
+
+            var inventories = await _inventoryRepository.Get(sortOrder);
             IEnumerable<Inventory> list = inventories.ToList();
 
             if (!String.IsNullOrEmpty(searchString))
@@ -35,7 +39,7 @@ namespace InventoryWebService.Controllers
         [HttpGet("api/Inventory")]
         public async Task<IEnumerable<Inventory>> Get()
         {
-            IEnumerable<Inventory> inventories = await _inventoryRepository.Get();
+            IEnumerable<Inventory> inventories = await _inventoryRepository.Get(null);
             return inventories;
            
         }       
@@ -185,37 +189,12 @@ namespace InventoryWebService.Controllers
             return Problem("Some internal error occurred");
         }
 
-        /* public async Task<IActionResult> Index(string movieGenre, string searchString)
-         {
-             if (_context.Movie == null)
-             {
-                 return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
-             }
+        [HttpGet("api/Inventory/values")]
+        public async Task<IEnumerable<Inventory>> Get(string sortBy, string returnVal="all")
+        {
+            IEnumerable<Inventory> inventories = await _inventoryRepository.Get(sortBy, returnVal);
+            return inventories;
 
-             // Use LINQ to get list of genres.
-             IQueryable<string> genreQuery = from m in _context.Movie
-             orderby m.Genre
-                                             select m.Genre;
-             var movies = from m in _context.Movie
-                          select m;
-
-             if (!string.IsNullOrEmpty(searchString))
-             {
-                 movies = movies.Where(s => s.Title!.Contains(searchString));
-             }
-
-             if (!string.IsNullOrEmpty(movieGenre))
-             {
-                 movies = movies.Where(x => x.Genre == movieGenre);
-             }
-
-             var movieGenreVM = new MovieGenreViewModel
-             {
-                 Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
-                 Movies = await movies.ToListAsync()
-             };
-
-             return View(movieGenreVM);
-         }*/
+        }
     }
 }

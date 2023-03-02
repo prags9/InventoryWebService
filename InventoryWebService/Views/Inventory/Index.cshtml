@@ -19,14 +19,16 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model![0].Name)
+            <th>                
+                
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model![0].Name)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model![0].Quantity!)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["QuantitySortParm"]">@Html.DisplayNameFor(model => model![0].Quantity!)</a>
+                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model![0].CreatedOn!)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CreatedOnSortParm"]">@Html.DisplayNameFor(model => model![0].CreatedOn!)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model![0].LastUpdatedOn!)
@@ -46,7 +48,7 @@
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                    @Html.DisplayFor(modelItem => item.CreatedOn)                    
                 </td>
                 <td>                   
                     @Html.DisplayFor(modelItem => item.LastUpdatedOn)
