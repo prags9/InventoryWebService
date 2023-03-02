@@ -109,5 +109,20 @@ namespace Test.API
             Assert.Equal(12, resultList[0].Quantity);
             Assert.Equal("Apples", resultList[0].Name);
         }
+        [Fact]
+        public async Task Delete()
+        {
+            var input = "Chiku";
+            //Arrange
+            _repo.Setup(x => x.Delete(input)).ReturnsAsync(true);
+
+            var api = new InventoryController(_repo.Object);
+
+            //Act
+            var result = await api.DeleteInventory(input);
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal("Successfully deleted the inventory", result);
+        }
     }
 }
