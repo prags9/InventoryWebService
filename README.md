@@ -52,5 +52,6 @@ This is an example of Sort APi-
 2. Included _LastUpdatedOn_ field so that we can track the update history.
 3. Included Unit test (xUnit) for controllers
 
+_Note_:- RowVersion functionality will only work when connected to sql server express.
 
 
